@@ -56,7 +56,7 @@ INSERT INTO `Student` VALUES(10005,'Linda', 'Simmons');
 INSERT INTO `Student` VALUES(10006,'Terrell', 'Majors');
 INSERT INTO `Student` VALUES(10007,'Robert', 'Johnson');
 INSERT INTO `Student` VALUES(10008,'Michaela', 'Jones');
-INSERT INTO `Student` VALUES(10009,'Jordyn', 'Ellis');
+INSERT INTO `Student` VALUES(10009,'Jordyn', 'Quinn');
 
 INSERT INTO `Course` VALUES(10000,'Computer Science' ,201, 'Computer Organization I','Fall',2023);
 INSERT INTO `Course` VALUES(10001,'Computer Science' ,136, 'Computer Science III','Fall',2023);
@@ -282,14 +282,14 @@ INSERT INTO `StudentAssignment` VALUES(10099, 10019, 10023, 94);
 
 SELECT AVG(Score), MAX(Score), MIN(Score)
 FROM StudentAssignment
-WHERE AssignmentID = ?;
+WHERE AssignmentID = 10003;
 
 -- List all of the students in a given course:
 
 SELECT s.StudentID, s.FirstName, s.LastName
 FROM Student s
 JOIN Enrollment e ON s.StudentID = e.StudentID
-WHERE e.CourseID = ?;
+WHERE e.CourseID = 10001;
 
 -- List all of the students in a course and all of their scores on every assignment:
 
@@ -298,19 +298,19 @@ FROM Student s
 JOIN Enrollment e ON s.StudentID = e.StudentID
 JOIN StudentAssignment sa ON e.EnrollmentID = sa.EnrollmentID
 JOIN Assignment a ON sa.AssignmentID = a.AssignmentID
-WHERE e.CourseID = ?;
+WHERE e.CourseID = 10001;
 
 -- Add an assignment to a course:
 
 INSERT INTO Assignment (CategoryID, MaxScore)
-VALUES (?, ?);
+VALUES (10013, 50);
 
 
 -- Change the percentages of the categories for a course:
 
 UPDATE Category
-SET Percentage = ?
-WHERE CourseID = ? AND CategoryID = ?;
+SET Percentage = 20.00
+WHERE CourseID = 10002 AND CategoryID = 10012;
 
 
 
@@ -318,13 +318,13 @@ WHERE CourseID = ? AND CategoryID = ?;
 
 UPDATE StudentAssignment
 SET Score = Score + 2
-WHERE AssignmentID = ?;
+WHERE AssignmentID = 10027;
 
 -- Add 2 points just to those students whose last name contains a 'Q':
 
 UPDATE StudentAssignment
 SET Score = Score + 2
-WHERE AssignmentID = ? AND EnrollmentID IN (
+WHERE AssignmentID = 10027 AND EnrollmentID IN (
   SELECT e.EnrollmentID
   FROM Enrollment e
   JOIN Student s ON e.StudentID = s.StudentID
@@ -340,7 +340,7 @@ FROM StudentAssignment sa
 JOIN Enrollment e ON sa.EnrollmentID = e.EnrollmentID
 JOIN Assignment a ON sa.AssignmentID = a.AssignmentID
 JOIN Category c ON a.CategoryID = c.CategoryID
-WHERE e.StudentID = ? AND e.CourseID = ?;
+WHERE e.StudentID = 10006 AND e.CourseID = 10002;
 
 
 -- Compute the grade for a student, where the lowest score for a given category is dropped:
@@ -365,5 +365,5 @@ WITH LowestScoreDropped AS (
 )
 SELECT StudentID, CourseID, SUM(CategoryScore) AS Grade
 FROM LowestScoreDropped
-WHERE StudentID = ? AND CourseID = ?
+WHERE StudentID = 10006 AND CourseID =10002 ?
 GROUP BY StudentID, CourseID;
