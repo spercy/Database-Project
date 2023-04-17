@@ -365,5 +365,5 @@ WITH LowestScoreDropped AS (
 )
 SELECT StudentID, CourseID, SUM(CategoryScore) AS Grade
 FROM LowestScoreDropped
-WHERE StudentID = 10006 AND CourseID =10002 ?
+WHERE StudentID = 10006 AND CourseID =10002 
 GROUP BY StudentID, CourseID;
