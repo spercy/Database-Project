@@ -132,7 +132,7 @@ INSERT INTO `Assignment` VALUES(10017, 10010, "Homework 2", 20);
 INSERT INTO `Assignment` VALUES(10018, 10010, "Homework 3", 20);
 INSERT INTO `Assignment` VALUES(10019, 10011, "Quiz 1", 10);
 INSERT INTO `Assignment` VALUES(10020, 10011, "Quiz 2", 10);
-INSERT INTO `Assignment` VALUES(10021, 10012, "Test 1", 50);
+INSERT INTO `Assignment` VALUES(10021, 10012, "Test 1", 100);
 INSERT INTO `Assignment` VALUES(10022, 10012, "Test 2", 100);
 INSERT INTO `Assignment` VALUES(10023, 10013, "Final", 100);
 
@@ -292,6 +292,27 @@ INSERT INTO `StudentAssignment` VALUES(10119, 10014, 10023, 94);
 
 -- SQL Queries for Various Tasks
 
+-- Show the tables with the contents that you have inserted;
+SELECT *
+FROM Student;
+
+SELECT *
+FROM Course;
+
+SELECT *
+FROM Enrollment;
+
+SELECT *
+FROM Category;
+
+SELECT *
+FROM Assignment;
+
+SELECT *
+FROM StudentAssignment;
+
+-- Compute the average/highest/lowest score of an assignment;
+
 SELECT AVG(Score), MAX(Score), MIN(Score)
 FROM StudentAssignment
 WHERE AssignmentID = 10003;
@@ -314,17 +335,24 @@ WHERE e.CourseID = 10001;
 
 -- Add an assignment to a course:
 
-INSERT INTO Assignment (CategoryID, MaxScore)
-VALUES (10013, 50);
+INSERT INTO Assignment (CategoryID, AssignmentName, MaxScore)
+VALUES (10012, "Test 3", 100);
 
 
 -- Change the percentages of the categories for a course:
 
 UPDATE Category
-SET Percentage = 20.00
-WHERE CourseID = 10002 AND CategoryID = 10012;
--- chnage to make total still 100
+SET Percentage = 25.00
+WHERE CourseID = 10002 AND CategoryID = 10013;
 
+UPDATE Category
+SET Percentage = 15.00
+WHERE CourseID = 10002 AND CategoryID = 10011;
+
+-- check if percentages add up to 100
+SELECT SUM(Percentage)
+FROM Category
+Group By CourseID;
 
 -- Add 2 points to the score of each student on an assignment:
 
