@@ -1,5 +1,5 @@
 # Database-Project
-Group 4 Submission
+Group 4: Stephanie Percy, Azandria Hudson, Brian Thaddeus Hunt
 
 1. Make sure you have the latest version of mysql installed and running
 2. Open MySQL Workbench
