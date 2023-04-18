@@ -1,12 +1,23 @@
 -- SQL Table Creation and Insertion
+USE Gradebook;
+
+SET FOREIGN_KEY_CHECKS = 0;
+DROP TABLE IF EXISTS `Student`;
+DROP TABLE IF EXISTS `Course`;
+DROP TABLE IF EXISTS `Enrollment`;
+DROP TABLE IF EXISTS `Category`;
+DROP TABLE IF EXISTS `Assignment`;
+DROP TABLE IF EXISTS `StudentAssignment`;
+SET FOREIGN_KEY_CHECKS = 1;
+
 CREATE TABLE Student (
-  StudentID INTEGER PRIMARY KEY,
+  StudentID INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
   FirstName VARCHAR(50),
   LastName VARCHAR(50)
 );
 
 CREATE TABLE Course (
-  CourseID INTEGER PRIMARY KEY,
+  CourseID INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
   Department VARCHAR(50),
   CourseNumber INTEGER,
   CourseName VARCHAR(100),
@@ -15,7 +26,7 @@ CREATE TABLE Course (
 );
 
 CREATE TABLE Enrollment (
-  EnrollmentID INTEGER PRIMARY KEY,
+  EnrollmentID INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
   StudentID INTEGER,
   CourseID INTEGER,
   FOREIGN KEY (StudentID) REFERENCES Student(StudentID),
@@ -23,7 +34,7 @@ CREATE TABLE Enrollment (
 );
 
 CREATE TABLE Category (
-  CategoryID INTEGER PRIMARY KEY,
+  CategoryID INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
   CourseID INTEGER,
   CategoryName VARCHAR(50),
   Percentage DECIMAL(4, 2),
@@ -31,14 +42,15 @@ CREATE TABLE Category (
 );
 
 CREATE TABLE Assignment (
-  AssignmentID INTEGER PRIMARY KEY,
+  AssignmentID INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
   CategoryID INTEGER,
+  AssignmentName VARCHAR(50),
   MaxScore INTEGER,
   FOREIGN KEY (CategoryID) REFERENCES Category(CategoryID)
 );
 
 CREATE TABLE StudentAssignment (
-  StudentAssignmentID INTEGER PRIMARY KEY,
+  StudentAssignmentID INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
   EnrollmentID INTEGER,
   AssignmentID INTEGER,
   Score INTEGER,
@@ -124,7 +136,7 @@ INSERT INTO `Assignment` VALUES(10021, 10012, "Test 1", 50);
 INSERT INTO `Assignment` VALUES(10022, 10012, "Test 2", 100);
 INSERT INTO `Assignment` VALUES(10023, 10013, "Final", 100);
 
-| class one
+-- class one
 
 INSERT INTO `StudentAssignment` VALUES(10000, 10000, 10000, 20);
 INSERT INTO `StudentAssignment` VALUES(10001, 10001, 10000, 22);
@@ -174,7 +186,7 @@ INSERT INTO `StudentAssignment` VALUES(10037, 10002, 10007, 78);
 INSERT INTO `StudentAssignment` VALUES(10038, 10003, 10007, 78);
 INSERT INTO `StudentAssignment` VALUES(10039, 10004, 10007, 83);
 
-| class two
+-- class two
 
 INSERT INTO `StudentAssignment` VALUES(10040, 10005, 10008, 20);
 INSERT INTO `StudentAssignment` VALUES(10041, 10006, 10008, 20);
@@ -209,7 +221,7 @@ INSERT INTO `StudentAssignment` VALUES(10064, 10009, 10012, 7);
 INSERT INTO `StudentAssignment` VALUES(10065, 10005, 10013, 47);
 INSERT INTO `StudentAssignment` VALUES(10066, 10006, 10013, 50);
 INSERT INTO `StudentAssignment` VALUES(10067, 10007, 10013, 44);
-INSERT INTO `StudentAssignment` VALUES(10068, 10008, 10013, 38;
+INSERT INTO `StudentAssignment` VALUES(10068, 10008, 10013, 38);
 INSERT INTO `StudentAssignment` VALUES(10069, 10009, 10013, 43);
 
 INSERT INTO `StudentAssignment` VALUES(10070, 10005, 10014, 91);
@@ -224,55 +236,55 @@ INSERT INTO `StudentAssignment` VALUES(10077, 10007, 10015, 89);
 INSERT INTO `StudentAssignment` VALUES(10078, 10008, 10015, 84);
 INSERT INTO `StudentAssignment` VALUES(10079, 10009, 10015, 92);
 
-| class three
+-- class three
 
-INSERT INTO `StudentAssignment` VALUES(10060, 10010, 10016, 19);
-INSERT INTO `StudentAssignment` VALUES(10061, 10011, 10016, 19);
-INSERT INTO `StudentAssignment` VALUES(10062, 10012, 10016, 20);
-INSERT INTO `StudentAssignment` VALUES(10063, 10014, 10016, 17);
-INSERT INTO `StudentAssignment` VALUES(10064, 10014, 10016, 20);
+INSERT INTO `StudentAssignment` VALUES(10080, 10010, 10016, 19);
+INSERT INTO `StudentAssignment` VALUES(10081, 10011, 10016, 19);
+INSERT INTO `StudentAssignment` VALUES(10082, 10012, 10016, 20);
+INSERT INTO `StudentAssignment` VALUES(10083, 10013, 10016, 17);
+INSERT INTO `StudentAssignment` VALUES(10084, 10014, 10016, 20);
 
-INSERT INTO `StudentAssignment` VALUES(10065, 10015, 10017, 19);
-INSERT INTO `StudentAssignment` VALUES(10066, 10016, 10017, 18);
-INSERT INTO `StudentAssignment` VALUES(10067, 10017, 10017, 20);
-INSERT INTO `StudentAssignment` VALUES(10068, 10018, 10017, 18);
-INSERT INTO `StudentAssignment` VALUES(10069, 10019, 10017, 19);
+INSERT INTO `StudentAssignment` VALUES(10085, 10010, 10017, 19);
+INSERT INTO `StudentAssignment` VALUES(10086, 10011, 10017, 18);
+INSERT INTO `StudentAssignment` VALUES(10087, 10012, 10017, 20);
+INSERT INTO `StudentAssignment` VALUES(10088, 10013, 10017, 18);
+INSERT INTO `StudentAssignment` VALUES(10089, 10014, 10017, 19);
 
-INSERT INTO `StudentAssignment` VALUES(10070, 10010, 10018, 18);
-INSERT INTO `StudentAssignment` VALUES(10071, 10011, 10018, 20);
-INSERT INTO `StudentAssignment` VALUES(10072, 10012, 10018, 17);
-INSERT INTO `StudentAssignment` VALUES(10073, 10014, 10018, 20);
-INSERT INTO `StudentAssignment` VALUES(10074, 10014, 10018, 19);
+INSERT INTO `StudentAssignment` VALUES(10090, 10010, 10018, 18);
+INSERT INTO `StudentAssignment` VALUES(10091, 10011, 10018, 20);
+INSERT INTO `StudentAssignment` VALUES(10092, 10012, 10018, 17);
+INSERT INTO `StudentAssignment` VALUES(10093, 10013, 10018, 20);
+INSERT INTO `StudentAssignment` VALUES(10094, 10014, 10018, 19);
 
-INSERT INTO `StudentAssignment` VALUES(10075, 10015, 10019, 9);
-INSERT INTO `StudentAssignment` VALUES(10076, 10016, 10019, 10);
-INSERT INTO `StudentAssignment` VALUES(10077, 10017, 10019, 10);
-INSERT INTO `StudentAssignment` VALUES(10078, 10018, 10019, 8);
-INSERT INTO `StudentAssignment` VALUES(10079, 10019, 10019, 10);
+INSERT INTO `StudentAssignment` VALUES(10095, 10010, 10019, 9);
+INSERT INTO `StudentAssignment` VALUES(10096, 10011, 10019, 10);
+INSERT INTO `StudentAssignment` VALUES(10097, 10012, 10019, 10);
+INSERT INTO `StudentAssignment` VALUES(10098, 10013, 10019, 8);
+INSERT INTO `StudentAssignment` VALUES(10099, 10014, 10019, 10);
 
-INSERT INTO `StudentAssignment` VALUES(10080, 10010, 10020, 10);
-INSERT INTO `StudentAssignment` VALUES(10081, 10011, 10020, 9);
-INSERT INTO `StudentAssignment` VALUES(10082, 10012, 10020, 7);
-INSERT INTO `StudentAssignment` VALUES(10083, 10014, 10020, 10);
-INSERT INTO `StudentAssignment` VALUES(10084, 10014, 10020, 8);
+INSERT INTO `StudentAssignment` VALUES(10100, 10010, 10020, 10);
+INSERT INTO `StudentAssignment` VALUES(10101, 10011, 10020, 9);
+INSERT INTO `StudentAssignment` VALUES(10102, 10012, 10020, 7);
+INSERT INTO `StudentAssignment` VALUES(10103, 10013, 10020, 10);
+INSERT INTO `StudentAssignment` VALUES(10104, 10014, 10020, 8);
 
-INSERT INTO `StudentAssignment` VALUES(10085, 10015, 10021, 49);
-INSERT INTO `StudentAssignment` VALUES(10086, 10016, 10021, 40);
-INSERT INTO `StudentAssignment` VALUES(10087, 10017, 10021, 50);
-INSERT INTO `StudentAssignment` VALUES(10088, 10018, 10021, 45);
-INSERT INTO `StudentAssignment` VALUES(10089, 10019, 10021, 39);
+INSERT INTO `StudentAssignment` VALUES(10105, 10010, 10021, 49);
+INSERT INTO `StudentAssignment` VALUES(10106, 10011, 10021, 40);
+INSERT INTO `StudentAssignment` VALUES(10107, 10012, 10021, 50);
+INSERT INTO `StudentAssignment` VALUES(10108, 10013, 10021, 45);
+INSERT INTO `StudentAssignment` VALUES(10109, 10014, 10021, 39);
 
-INSERT INTO `StudentAssignment` VALUES(10090, 10010, 10022, 84);
-INSERT INTO `StudentAssignment` VALUES(10091, 10011, 10022, 79);
-INSERT INTO `StudentAssignment` VALUES(10092, 10012, 10022, 87);
-INSERT INTO `StudentAssignment` VALUES(10093, 10014, 10022, 90);
-INSERT INTO `StudentAssignment` VALUES(10094, 10014, 10022, 93);
+INSERT INTO `StudentAssignment` VALUES(10110, 10010, 10022, 84);
+INSERT INTO `StudentAssignment` VALUES(10111, 10011, 10022, 79);
+INSERT INTO `StudentAssignment` VALUES(10112, 10012, 10022, 87);
+INSERT INTO `StudentAssignment` VALUES(10113, 10013, 10022, 90);
+INSERT INTO `StudentAssignment` VALUES(10114, 10014, 10022, 93);
 
-INSERT INTO `StudentAssignment` VALUES(10095, 10015, 10023, 90);
-INSERT INTO `StudentAssignment` VALUES(10096, 10016, 10023, 83);
-INSERT INTO `StudentAssignment` VALUES(10097, 10017, 10023, 89);
-INSERT INTO `StudentAssignment` VALUES(10098, 10018, 10023, 88);
-INSERT INTO `StudentAssignment` VALUES(10099, 10019, 10023, 94);
+INSERT INTO `StudentAssignment` VALUES(10115, 10010, 10023, 90);
+INSERT INTO `StudentAssignment` VALUES(10116, 10011, 10023, 83);
+INSERT INTO `StudentAssignment` VALUES(10117, 10012, 10023, 89);
+INSERT INTO `StudentAssignment` VALUES(10118, 10013, 10023, 88);
+INSERT INTO `StudentAssignment` VALUES(10119, 10014, 10023, 94);
 
 
 
@@ -311,7 +323,7 @@ VALUES (10013, 50);
 UPDATE Category
 SET Percentage = 20.00
 WHERE CourseID = 10002 AND CategoryID = 10012;
-
+-- chnage to make total still 100
 
 
 -- Add 2 points to the score of each student on an assignment:
@@ -333,37 +345,32 @@ WHERE AssignmentID = 10027 AND EnrollmentID IN (
 
 
 -- Compute the grade for a student:
-
-
-SELECT SUM(c.Percentage * sa.Score / a.MaxScore) AS Grade
-FROM StudentAssignment sa
-JOIN Enrollment e ON sa.EnrollmentID = e.EnrollmentID
-JOIN Assignment a ON sa.AssignmentID = a.AssignmentID
-JOIN Category c ON a.CategoryID = c.CategoryID
-WHERE e.StudentID = 10006 AND e.CourseID = 10002;
-
-
--- Compute the grade for a student, where the lowest score for a given category is dropped:
-
-
-WITH LowestScoreDropped AS (
-  SELECT e.StudentID, c.CategoryID, c.CourseID, SUM(c.Percentage * sa.Score / a.MaxScore) AS CategoryScore
+SELECT SUM(g.Grade)
+FROM (SELECT e.StudentID, c.CategoryID, c.Percentage * AVG(sa.Score / a.MaxScore) AS Grade
   FROM StudentAssignment sa
   JOIN Enrollment e ON sa.EnrollmentID = e.EnrollmentID
   JOIN Assignment a ON sa.AssignmentID = a.AssignmentID
   JOIN Category c ON a.CategoryID = c.CategoryID
-  WHERE sa.Score != (
-    SELECT MIN(sa2.Score)
+  WHERE e.StudentID = 10006 AND e.CourseID = 10001
+  GROUP BY c.CategoryID) g;
+
+-- Compute the grade for a student, where the lowest score for a given category is dropped:
+
+SELECT SUM(g.Grade)
+FROM (SELECT e.StudentID, c.CategoryID, c.Percentage * AVG(sa.Score / a.MaxScore) AS Grade
+  FROM StudentAssignment sa
+  JOIN Enrollment e ON sa.EnrollmentID = e.EnrollmentID
+  JOIN Assignment a ON sa.AssignmentID = a.AssignmentID
+  JOIN Category c ON a.CategoryID = c.CategoryID
+  WHERE e.StudentID = 10006 AND e.CourseID = 10001 AND
+  sa.StudentAssignmentID != (SELECT l.StudentAssignmentID
+  FROM (SELECT sa2.StudentAssignmentID, MIN(sa2.Score / a2.MaxScore) as lowest
     FROM StudentAssignment sa2
-    WHERE sa2.EnrollmentID = sa.EnrollmentID AND sa2.AssignmentID IN (
-      SELECT a2.AssignmentID
-      FROM Assignment a2
-      WHERE a2.CategoryID = a.CategoryID
-    )
-  )
-  GROUP BY e.StudentID, c.CategoryID, c.CourseID
-)
-SELECT StudentID, CourseID, SUM(CategoryScore) AS Grade
-FROM LowestScoreDropped
-WHERE StudentID = 10006 AND CourseID =10002 
-GROUP BY StudentID, CourseID;
+    JOIN Enrollment e2 ON sa2.EnrollmentID = e2.EnrollmentID
+    JOIN Assignment a2 ON sa2.AssignmentID = a2.AssignmentID
+    JOIN Category c2 ON a2.CategoryID = c2.CategoryID
+    WHERE e2.StudentID = 10006 AND e2.CourseID = 10001 AND c2.CategoryID = 10005
+    GROUP BY sa2.StudentAssignmentID
+    ORDER BY lowest ASC
+    LIMIT 1) l)
+  GROUP BY c.CategoryID) g;
